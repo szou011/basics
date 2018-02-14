@@ -1,12 +1,18 @@
 set nocompatible 
 set number
 
-set guifont=Monaco:h13
+" set English font and Chinese font
+set guifont=Monaco:h13:cANSI
+set guifontwide=wqy-microhei:h12
 
 syntax on
 
 " highlight search
 set hlsearch
+" change up down left right shortcut
+nnoremap i k
+nnoremap k j
+nnoremap j h
 
 " set the runtime path to include Vundle and initialise
 filetype off
@@ -25,10 +31,10 @@ filetype plugin indent on
 set splitbelow
 set splitright
 
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+nnoremap <C-k> <C-W><C-J>
+nnoremap <C-i> <C-W><C-K>
+nnoremap <C-l> <C-W><C-L>
+nnoremap <C-j> <C-W><C-H>
 
 " enable folding
 set foldmethod=indent
