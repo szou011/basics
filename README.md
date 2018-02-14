@@ -5,25 +5,25 @@ All codes in Python 3
 
 =====================
 
-.vimrc configuration
+## .vimrc configuration
 
-# copy .vimrc into ~ folder
+### copy .vimrc into ~ folder
 
-# create .vim and bundle directories
+### create .vim and bundle directories
 cd ~
 mkdir .vim
 cd .vim
 mkdir bundle
 
-# download bundle
+### download bundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-#Enter vim and run follow command
+### Enter vim and run follow command
 :PluginInstall
 
-# in case there is no Cmake for YouCompleteMe plugin, install Cmake
+### in case there is no Cmake for YouCompleteMe plugin, install Cmake
 sudo apt-get install build-essential cmake
 
-# complile YouCompleteMe plugin
+### complile YouCompleteMe plugin
 cd ~/.vim/bundle/YouCompleteMe
 ./install.py
