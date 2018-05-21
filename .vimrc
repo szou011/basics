@@ -10,9 +10,10 @@ syntax on
 " highlight search
 set hlsearch
 " change up down left right shortcut
-nnoremap i k
-nnoremap k j
-nnoremap j h
+map i <Up>
+map j <Left>
+map k <Down>
+noremap h i
 
 " set the runtime path to include Vundle and initialise
 filetype off
@@ -65,3 +66,5 @@ autocmd StdinreadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 map <C-n> :NERDTreeToggle<CR>
 
+" disable i for NERDTree
+let NERDTreeMapOpenSplit='\i'
