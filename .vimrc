@@ -46,7 +46,7 @@ au BufNewFile,BufRead *.py setf python3
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set textwidth=80
+set wrap 
 set expandtab
 set autoindent
 set fileformat=unix
