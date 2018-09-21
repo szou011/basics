@@ -17,6 +17,9 @@ git add . or git add filename
 ### add commit to changes made
 git commit -m "your_commit"
 
+### to push a new repository to remote repository
+git remote add origin git@github.com:szou011/repositoryname.git
+
 ### push to remote repositories
 git push origin master
 
