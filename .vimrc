@@ -1,6 +1,9 @@
 set nocompatible 
 set number
 
+" Resolve backspace key won't move from current line
+set backspace=indent,eol,start
+
 " set English font and Chinese font
 set guifont=Monaco:h13:cANSI
 set guifontwide=wqy-microhei:h12
@@ -20,10 +23,7 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
-Plugin 'jnurmine/Zenburn'
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdtree'
-Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()
@@ -54,12 +54,12 @@ set fileformat=unix
 set encoding=utf-8
 
 " set up colorscheme
-if has('gui_running')
-    set background=dark
-    colorscheme solarized
-else
-    colorscheme zenburn
-endif    
+" if has('gui_running')
+"    set background=dark
+"    colorscheme solarized
+"else
+"    colorscheme zenburn
+"endif    
 
 " set up NERDTree - a file tree
 autocmd StdinreadPre * let s:std_in=1
