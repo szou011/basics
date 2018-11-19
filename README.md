@@ -1,4 +1,1 @@
-# inPython
-Codes in python for workflow automation or efficiency improvments
-
-All codes in Python 3
+basic operation/setup
