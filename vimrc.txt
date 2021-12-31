@@ -1,11 +1,10 @@
+" enter the current millenium, no compatibility with vi
 set nocompatible 
 set number
 
 " Resolve backspace key won't move from current line
 set backspace=indent,eol,start
 
-" enable python highlight
-let python_highlight_all=1
 syntax on
 
 " enable MacOS system clipboard
@@ -13,6 +12,17 @@ set clipboard=unnamed
 
 " highlight search
 set hlsearch
+
+" clear highlight on pressing  \ backslash
+nnoremap \ :noh<return>
+
+" autocomplete brackets
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap < <><left>
 
 " change up down left right shortcut
 map i <Up>
@@ -31,76 +41,41 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'scrooloose/nerdtree'
-Plug 'itchyny/lightline.vim'
-Plug 'fcpg/vim-fahrenheit'
-Plug 'nvie/vim-flake8'
+Plug 'ajmwagar/vim-deus'
+Plug 'vim-airline/vim-airline'
+Plug 'morhetz/gruvbox'
 call plug#end() 
-
-" Press F5 to run script
-" imap <F5> <Esc>:w<CR>:!clear;python3 %<CR>
-map <F5> :call CompileRunGcc()<CR>
-func! CompileRunGcc()
-        exec "w"
-        if &filetype == 'c'
-                exec "!g++ % -o %<"
-                exec "!time ./%<"
-        elseif &filetype == 'cpp'
-                exec "!g++ % -o %<"
-                exec "!time ./%<"
-        elseif &filetype == 'java'
-                exec "!javac %"
-                exec "!time java %<"
-        elseif &filetype == 'sh'
-                :!time bash %
-        elseif &filetype == 'python'
-                exec "!clear"
-                exec "!time python3 %"
-        elseif &filetype == 'html'
-                exec "!firefox % &"
-        elseif &filetype == 'go'
-                " exec "!go build %<"
-                exec "!time go run %"
-        elseif &filetype == 'mkd'
-                exec "!~/.vim/markdown.pl % > %.html &"
-                exec "!firefox %.html &"
-        endif
-endfunc
 
 " split screen
 set splitbelow
 set splitright
 
-" highlight current line
-set cursorline
+" highlight current line when insert mode
+autocmd InsertEnter,InsertLeave * set cul!
 
+" enable folding using spacebar
+set foldmethod=indent
+set foldlevel=99
+nnoremap <space> za
+
+" change key-bilding for windows moving
 nnoremap <C-k> <C-W><C-J>
 nnoremap <C-i> <C-W><C-K>
 nnoremap <C-l> <C-W><C-L>
 nnoremap <C-j> <C-W><C-H>
 
-" color scheme
-colorscheme fahrenheit 
-" set background=dark
+set background=dark
+colorscheme gruvbox
+" set t_Co=256
+
+" no backgroud, must be after colorscheme
+" hi Normal guibg=NONE ctermbg=NONE
+
 
 " PEP 8
-au BufNewFile,BufRead *.py setf python3
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set textwidth=79
-set wrap linebreak nolist 
-set expandtab
-set autoindent
-set fileformat=unix
+au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=0 expandtab autoindent fileformat=unix
 
 set encoding=utf-8
 
-" set up NERDTree - a file tree
-autocmd vimenter * NERDTree
-map <C-n> :NERDTreeToggle<CR>
-
-" disable i for NERDTree
-let NERDTreeMapOpenSplit='\i'
-
-" 
+" In normal mode and once you press <F9> it first saves your file and then run the file with python
+autocmd FileType python map <buffer> <F9> :w<CR>:exec '!clear; python3' shellescape(@%, 1)<CR>
