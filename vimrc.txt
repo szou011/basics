@@ -32,6 +32,7 @@ noremap h i
 
 " change esc key to 'kj'
 imap kj <Esc>
+vmap kj <Esc>
 
 " Check if vim-plug is installed
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -40,18 +41,15 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+
 call plug#begin('~/.vim/plugged')
-Plug 'ajmwagar/vim-deus'
 Plug 'vim-airline/vim-airline'
-Plug 'morhetz/gruvbox'
+Plug 'hzchirs/vim-material'
 call plug#end() 
 
 " split screen
 set splitbelow
 set splitright
-
-" highlight current line when insert mode
-autocmd InsertEnter,InsertLeave * set cul!
 
 " enable folding using spacebar
 set foldmethod=indent
@@ -64,13 +62,17 @@ nnoremap <C-i> <C-W><C-K>
 nnoremap <C-l> <C-W><C-L>
 nnoremap <C-j> <C-W><C-H>
 
+set termguicolors
 set background=dark
-colorscheme gruvbox
-" set t_Co=256
+colorscheme vim-material
 
+let g:airline_theme='material'
 " no backgroud, must be after colorscheme
 " hi Normal guibg=NONE ctermbg=NONE
 
+" highlight current line when insert mode
+" autocmd InsertEnter,InsertLeave * set cul!
+" highlight CursorLine term=None cterm=None guibg=#455A64 guifg=#CCEAE7
 
 " PEP 8
 au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=0 expandtab autoindent fileformat=unix
@@ -78,4 +80,13 @@ au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=0 
 set encoding=utf-8
 
 " In normal mode and once you press <F9> it first saves your file and then run the file with python
+" autocmd: command that Vim will execute automatically on {event} (here: if you open a python file)
+" [i]map: creates a keyboard shortcut to <F9> in insert/normal mode
+" <buffer>: If multiple buffers/files are open: just use the active one
+" <esc>: leaving insert mode
+" :w<CR>: saves your file
+" !: runs the following command in your shell (try :!ls)
+" %: is replaced by the filename of your active buffer. But since it can contain things like whitespace and other "bad" stuff it is better practise not to write :python %, but use:
+" shellescape: escape the special characters. The 1 means with a backslash
+
 autocmd FileType python map <buffer> <F9> :w<CR>:exec '!clear; python3' shellescape(@%, 1)<CR>
